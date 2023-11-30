@@ -18,6 +18,7 @@ export type T_Product = {
 
 export type RootState = {
   orderDetails: {
+    approvalStatus: EAPPROVAL_STATUS;
     products: T_Product[];
   };
 };

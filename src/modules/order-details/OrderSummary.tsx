@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import CustomCard from "../common/CustomCard";
 import { ReactNode } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../types/store-types";
+import { EAPPROVAL_STATUS } from "../../constants/common-constants";
 
 interface IOrderSummary {
   data: {
@@ -41,13 +44,22 @@ const OrderSummaryCard = styled.div`
 
 export default function OrderSummary(props: IOrderSummary) {
   const { data } = props;
+  const orderStatus = useSelector(
+    (state: RootState) => state.orderDetails.approvalStatus
+  );
+  console.log(orderStatus);
   return (
     <CustomCard margin="4rem 0 3rem">
       <OrderSummaryContainer>
         {data?.map((summaryData) => (
           <OrderSummaryCard key={summaryData.title}>
             <div className="title">{summaryData.title}</div>
-            <div className="content">{summaryData.content}</div>
+            <div className="content">
+              {summaryData.title === "Status" &&
+              orderStatus === EAPPROVAL_STATUS.approved
+                ? "Approved"
+                : summaryData.content}
+            </div>
           </OrderSummaryCard>
         ))}
       </OrderSummaryContainer>

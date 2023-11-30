@@ -66,3 +66,6 @@ export const EDIT_REASON_OPTIONS = [
     value: "other",
   },
 ];
+
+export const ALREADY_APPROVED_ERROR =
+  "Order can not be modified, once approved. Refresh to begin again";

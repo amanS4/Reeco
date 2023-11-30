@@ -28,14 +28,14 @@ const TableHeader = styled.th<{ productName?: boolean }>`
   color: #a2a2a2;
 `;
 
-const TableData = styled.td<{ actionCol?: boolean }>`
+const TableData = styled.td<{ actioncol?: boolean }>`
   padding: 1rem 0;
   border-bottom: 1px solid #acacac;
   font-size: 1.4rem;
-  background: ${(props) => (props.actionCol ? "#fbfbfb" : "inherit")};
+  background: ${(props) => (props.actioncol ? "#fbfbfb" : "inherit")};
   display: flex;
   justify-content: ${(props) =>
-    props.actionCol ? "space-between" : "flex-start"};
+    props.actioncol ? "space-between" : "flex-start"};
   align-items: center;
   &.actionCol {
     i {
@@ -166,7 +166,7 @@ const CustomTable = () => {
                   {`${productData.weight} * 1${productData.weightUnit}`}
                 </TableData>
                 <TableData>$ {productData.total}</TableData>
-                <TableData className="actionCol" actionCol>
+                <TableData className="actionCol" actioncol>
                   <StatusTag
                     background={
                       productData.status === EAPPROVAL_STATUS.approved

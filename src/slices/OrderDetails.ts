@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  ALREADY_APPROVED_ERROR,
   DEFAULT_PRODUCT,
   EAPPROVAL_STATUS,
 } from "../constants/common-constants";
@@ -21,26 +22,38 @@ const orderDetailsSlice = createSlice({
   },
   reducers: {
     updateDetails: (state, action) => {
-      const { productId, newData } = action.payload;
-      const product = state.products.find((p) => p.id === productId);
-      if (product) {
-        product.oldPrice = product.price;
-        product.price = newData.price;
-        product.quantity = newData.quantity;
-        product.total = newData.total;
-        product.editReason = newData.editReason;
+      if (state.approvalStatus !== EAPPROVAL_STATUS.approved) {
+        const { productId, newData } = action.payload;
+        const product = state.products.find((p) => p.id === productId);
+        if (product) {
+          product.oldPrice = product.price;
+          product.price = newData.price;
+          product.quantity = newData.quantity;
+          product.total = newData.total;
+          product.editReason = newData.editReason;
+        }
+      } else {
+        window.alert(ALREADY_APPROVED_ERROR);
       }
     },
     updateStatus: (state, action) => {
-      const { productId, newStatus } = action.payload;
-      const product = state.products.find((p) => p.id === productId);
-      if (product) {
-        product.status = newStatus;
+      if (state.approvalStatus !== EAPPROVAL_STATUS.approved) {
+        const { productId, newStatus } = action.payload;
+        const product = state.products.find((p) => p.id === productId);
+        if (product) {
+          product.status = newStatus;
+        }
+      } else {
+        window.alert(ALREADY_APPROVED_ERROR);
       }
     },
     addProduct: (state, action) => {
-      const { newProduct } = action.payload;
-      state.products.push(newProduct);
+      if (state.approvalStatus !== EAPPROVAL_STATUS.approved) {
+        const { newProduct } = action.payload;
+        state.products.push(newProduct);
+      } else {
+        window.alert(ALREADY_APPROVED_ERROR);
+      }
     },
     updateOrderStatus: (state, action) => {
       const { status } = action.payload;
