@@ -2,7 +2,10 @@ import styled from "styled-components";
 import CustomPopup from "../common/CustomPopup";
 import { T_Product } from "../../types/store-types";
 import CustomButton from "../common/CustomButton";
-import { EDIT_REASON_OPTIONS } from "../../constants/common-constants";
+import {
+  EAPPROVAL_STATUS,
+  EDIT_REASON_OPTIONS,
+} from "../../constants/common-constants";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateDetails } from "../../slices/OrderDetails";
@@ -82,6 +85,17 @@ export default function EditPopup(props: IEditPopuo) {
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
+    let status = productData.status;
+    if (
+      productData.price !== editedData.price &&
+      productData.quantity !== editedData.quantity
+    ) {
+      status = EAPPROVAL_STATUS.priceQuantUpdated;
+    } else if (productData.price !== editedData.price) {
+      status = EAPPROVAL_STATUS.priceUpdated;
+    } else if (productData.quantity !== editedData.quantity) {
+      status = EAPPROVAL_STATUS.quanityUpdated;
+    }
     dispatch(
       updateDetails({
         productId: editedData.id,
@@ -90,6 +104,7 @@ export default function EditPopup(props: IEditPopuo) {
           price: editedData.price,
           total: editedData.total,
           editReason: reasonState,
+          status: status,
         },
       })
     );
@@ -102,6 +117,7 @@ export default function EditPopup(props: IEditPopuo) {
         ...data,
         price: Number(e.target.value) || "",
         total: data.quantity * Number(e.target.value),
+        status: EAPPROVAL_STATUS.priceUpdated,
       } as T_Product;
     });
   };
@@ -111,6 +127,7 @@ export default function EditPopup(props: IEditPopuo) {
         ...data,
         quantity: Math.round(Number(e.target.value)) || "",
         total: data.price * Math.round(Number(e.target.value)),
+        status: EAPPROVAL_STATUS.quanityUpdated,
       } as T_Product;
     });
   };

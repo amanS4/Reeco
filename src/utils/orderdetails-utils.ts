@@ -10,6 +10,12 @@ export const getStatusLabel = (statusCode: EAPPROVAL_STATUS) => {
       return "Missing";
     case EAPPROVAL_STATUS.missingUrgent:
       return "Missing-Urgent";
+    case EAPPROVAL_STATUS.priceQuantUpdated:
+      return "Price & Quanity Updated";
+    case EAPPROVAL_STATUS.priceUpdated:
+      return "Price Updated";
+    case EAPPROVAL_STATUS.quanityUpdated:
+      return "Quanity Updated";
     default:
       return "";
   }

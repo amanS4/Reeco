@@ -175,6 +175,12 @@ const CustomTable = () => {
                         ? "#DB2114"
                         : productData.status === EAPPROVAL_STATUS.missing
                         ? "#F66D44"
+                        : productData.status ===
+                            EAPPROVAL_STATUS.priceQuantUpdated ||
+                          productData.status ===
+                            EAPPROVAL_STATUS.quanityUpdated ||
+                          productData.status === EAPPROVAL_STATUS.priceUpdated
+                        ? "#F66D44"
                         : "none"
                     }
                   >

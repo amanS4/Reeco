@@ -31,6 +31,7 @@ const orderDetailsSlice = createSlice({
           product.quantity = newData.quantity;
           product.total = newData.total;
           product.editReason = newData.editReason;
+          product.status = newData.status;
         }
       } else {
         window.alert(ALREADY_APPROVED_ERROR);

@@ -31,6 +31,9 @@ export enum EAPPROVAL_STATUS {
   error = 2,
   missingUrgent = 3,
   notSet = 4,
+  priceUpdated = 5,
+  quanityUpdated = 6,
+  priceQuantUpdated = 7,
 }
 
 export const DEFAULT_PRODUCT = {
