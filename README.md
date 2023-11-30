@@ -6,3 +6,8 @@
 2. Typescript for robustness, and type safety.
 3. Styled Components for making custom UIs.
 4. Redux toolkit for state management.
+
+
+To run locally:
+npm ci
+npm run dev
